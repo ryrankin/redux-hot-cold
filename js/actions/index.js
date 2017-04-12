@@ -1,6 +1,6 @@
 export const NUMBER_GUESS = 'NUMBER_GUESS';
 export const numberGuess = value => ({
-	type: 'NUMBER_GUESS',
+	type: NUMBER_GUESS,
 	value: value
 });
 
