@@ -8,7 +8,7 @@ const initialState = {
 	won: false
 };
 
-export const gameReducer = (state=initialState, action)
+export const gameReducer = (state=initialState, action) => {
 	if(action.type === actions.USER_GUESS){
 		const guess = parseInt(action.guess, 10);
 		console.log('guess', guess);
