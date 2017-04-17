@@ -1,6 +1,9 @@
 import React from 'react';
+import FormContainer from './form-container';
 import {connect} from 'react-redux';
-import {newGame} from '..actions/index';
+import {newGame} from '../actions/index';
+
+import GuessList from './guess-list';
 
 export class Game extends React.Component{
 	render(){

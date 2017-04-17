@@ -5,6 +5,6 @@ export default function Form(props){
 			<form onSubmit-{props.onSubmit}>
 				<input type="text" value={props.value} onChange={props.onChange} />
 				<input type="submit" />
-			</form>
+			</form>touch 
 		)
 }
