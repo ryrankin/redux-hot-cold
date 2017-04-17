@@ -21,6 +21,9 @@ export const gameReducer = (state=initialState, action) => {
 			feedback = 'VERY COLD'
 		}
 		else if(difference > 30){
+			feedback = 'COLD'
+		}
+		else if(difference > 20){
 			feedback = 'WARM'
 		}
 		else if(difference >= 1){
@@ -28,7 +31,7 @@ export const gameReducer = (state=initialState, action) => {
 		}
 		else {
 			feedback = 'Right Answer';
-			won = 'true';
+			won = true;
 		}
 
 		return {...state, 
