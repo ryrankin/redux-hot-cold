@@ -5,7 +5,7 @@ import {userGuess} from '../actions/index';
 
 import Form from './form';
 
-export class FormContainer extends React.Componenet{
+export class FormContainer extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
