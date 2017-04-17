@@ -4,7 +4,7 @@ const initialState = {
 	feedback: 'Make a guess',
 	guess: '',
 	guessList: [],
-	rightAnswer: Math.floor(Math.random() * 100),
+	rightAnswer: Math.floor((Math.random() * 100)),
 	won: false
 };
 
