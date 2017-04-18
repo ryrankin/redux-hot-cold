@@ -2,52 +2,63 @@ import * as actions from '../actions/index';
 
 const initialState = {
 	feedback: 'Make a guess',
+	fewestGuesses: '',
 	guess: '',
 	guessList: [],
-	rightAnswer: Math.floor((Math.random() * 100)),
+	rightAnswer: Math.floor(Math.random()*100),
 	won: false
 };
 
-export const gameReducer = (state=initialState, action) => {
-	if(action.type === actions.USER_GUESS){
+export const gameReducer = (state = initialState, action) => {
+	if(action.type === actions.USER_GUESS) {
 		const guess = parseInt(action.guess, 10);
-		console.log('guess', guess);
-		console.log(state.rightAnswer);
-		const difference = Math.abs(guess - state.rightAnswer);
+		const difference = Math.abs(state.rightAnswer - guess);
 		let feedback;
 		let won = state.won;
 
-		if(difference > 50){
-			feedback = 'VERY COLD'
-		}
-		else if(difference > 30){
+		if(difference >= 25) {
 			feedback = 'COLD'
 		}
-		else if(difference > 20){
+		else if(difference >= 10) {
 			feedback = 'WARM'
 		}
-		else if(difference >= 1){
+		else if(difference >= 5) {
 			feedback = 'HOT'
 		}
+		else if(difference >= 1) {
+			feedback = 'VERY HOT'
+		}
 		else {
-			feedback = 'Right Answer';
+			feedback = 'You got the right answer!';
 			won = true;
 		}
 
-		return {...state, 
-				feedback: feedback,
-				guess: guess,
-				guessList: state.guessList.concat(guess),
-				won: won
-			}
-
+		return {...state,
+			feedback: feedback,
+			guess: guess,
+			guessList: state.guessList.concat(guess),
+			won: won
+		}
 	}
-	else if(action.type === actions.NEW_GAME){
+
+	else if(action.type === actions.NEW_GAME) {
 		return {...initialState,
-				rightAnswer: Math.floor((Math.random() * 100))
-			}
+			fewestGuesses: state.fewestGuesses,
+			rightAnswer: Math.floor((Math.random()*100))
+		}
+	}
+
+	else if(action.type === actions.POST_FEWEST_GUESSES_SUCCESS) {
+		return{...state,
+			fewestGuesses: state.guessList.length
+		}
+	}
+
+	else if(action.type === actions.FETCH_FEWEST_GUESSES_SUCCESS) {
+		return{...state,
+			fewestGuesses: state.fewestGuesses
+		}
 	}
 
 	return state;
-
 }
