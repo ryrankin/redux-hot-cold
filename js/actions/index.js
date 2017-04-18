@@ -51,7 +51,35 @@ export const postFewestGuesses = fewestGuesses => dispatch => {
 		})
 }
 
+export const FETCH_FEWEST_GUESSES_SUCCESS = 'FETCH_FEWEST_GUESSES_SUCCESS';
+export const fetchFewestGuessesSuccess = () => {
+	type: FETCH_FEWEST_GUESSES_SUCCESS
+};
 
+export const FETCH_FEWEST_GUESSES_ERROR = 'FETCH_FEWEST_GUESSES_ERROR';
+export const fetchFewestGuessesError = error => {
+	type: FETCH_FEWEST_GUESSES_ERROR,
+	error
+}
+
+export const fetchFewestGuesses = () => dispatch => {
+	fetch('/fewest-guesses')
+			.then(response => {
+					if(!response.ok) {
+						let error = new Error(response.statusText);
+						error.response = response;
+						throw error;
+					}
+			})
+			.then(response => response.json())
+			.then(data => {
+					dispatch(fetchFewestGuessesSuccess());
+					console.log(data);
+			})
+			.then(error => {
+					dispatch(fetchFewestGuessesError(error))
+			})
+}
 
 
 
